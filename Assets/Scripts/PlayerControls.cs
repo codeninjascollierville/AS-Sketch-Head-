@@ -8,7 +8,7 @@ public class PlayerControls : MonoBehaviour
 
     //Rigidbody2D object that is stored 
     [Header("Rigidbody")]
-    public Rigidbody rb;
+    public Rigidbody2D rb;
     [Header("Defualt Down Speed")]
     //downward speed of the object
     public float downSpeed = 20f;
@@ -28,7 +28,21 @@ public class PlayerControls : MonoBehaviour
     
     // Update is called once per frame
     void Update()
+    { 
+    //movement equals Horizontal movement 
+    //multiplied by the movement speed
+    movement = Input.GetAxis("Horizontal") * movementSpeed;
+        //if direction on x axis is less than 0
+        if (movement< 0)
     {
 
-    }
-}
+            //object faces on the left
+            this.GetComponet<SpriteRenderer>().flipX = false;
+        }
+        //if direction on x axis is greater than 0
+        else
+        {
+            //object faces to thr right
+            this.GetComponet<SpriteRenderer>().flipX = true;
+
+
