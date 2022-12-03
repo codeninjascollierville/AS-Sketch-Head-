@@ -25,16 +25,16 @@ public class PlayerControls : MonoBehaviour
         //varible equals to coponment Rigidbody2D 
         rb = GetComponent<Rigidbody2D>();
     }
-    
+
     // Update is called once per frame
     void Update()
-    { 
-    //movement equals Horizontal movement 
-    //multiplied by the movement speed
-    movement = Input.GetAxis("Horizontal") * movementSpeed;
-        //if direction on x axis is less than 0
-        if (movement< 0)
     {
+        //movement equals Horizontal movement 
+        //multiplied by the movement speed
+        movement = Input.GetAxis("Horizontal") * movementSpeed;
+        //if direction on x axis is less than 0
+        if (movement < 0)
+        {
 
             //object faces on the left
             this.GetComponet<SpriteRenderer>().flipX = false;
@@ -42,7 +42,26 @@ public class PlayerControls : MonoBehaviour
         //if direction on x axis is greater than 0
         else
         {
-            //object faces to thr right
+            //object faces to the right
             this.GetComponet<SpriteRenderer>().flipX = true;
 
+        }
+
+        //Fixedupdate called every fixed frame-rate.
+        void FixedUpdate
+            //velocity of the x axis equals to 
+            //the direction movement on the  x axis
+            // of the character .
+        velocity.x = movement;
+        //Rigidbody2D velocity equals to
+        //velocity of the object
+        rb.velocity = velocity;
+    }
+
+    //Collision function 
+    private void OnCollisionEnter2D(Collision2D collsion)
+    {
+        //velocity with the downspeed 
+        rb.velocity = new Vector3(rb.velocity.x, downSpeed, 0);
+    
 
