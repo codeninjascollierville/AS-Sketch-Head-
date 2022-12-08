@@ -6,6 +6,7 @@ using UnityEngine.UI;
 public class PlayerControls : MonoBehaviour
 {
 
+
     //Rigidbody2D object that is stored 
     [Header("Rigidbody")]
     public Rigidbody2D rb;
@@ -18,7 +19,7 @@ public class PlayerControls : MonoBehaviour
     [Header("default Direction Movement Speed")]
     //movement direction of the object 
     public float movement = 0f;
-    
+
     // Start is called before the first frame update
     void Start()
     {
@@ -37,31 +38,39 @@ public class PlayerControls : MonoBehaviour
         {
 
             //object faces on the left
-            this.GetComponet<SpriteRenderer>().flipX = false;
+            this.GetComponent<SpriteRenderer>().flipX = false;
         }
         //if direction on x axis is greater than 0
         else
         {
             //object faces to the right
-            this.GetComponet<SpriteRenderer>().flipX = true;
+            this.GetComponent<SpriteRenderer>().flipX = true;
 
         }
 
-        //Fixedupdate called every fixed frame-rate.
-        void FixedUpdate
-            //velocity of the x axis equals to 
-            //the direction movement on the  x axis
-            // of the character .
+
+
+    }
+    //Fixedupdate called every fixed frame-rate frame.
+    void FixedUpdate()
+    {
+        //Vector2 which is (x,y) velocity 
+        //equalls to the velocity of the rigidbody2D
+        Vector2 velocity = rb.velocity;
+        //velocity of the x axis equals to 
+        //the direction movement on the  x axis
+        // of the character .
         velocity.x = movement;
         //Rigidbody2D velocity equals to
         //velocity of the object
         rb.velocity = velocity;
+
     }
 
     //Collision function 
     private void OnCollisionEnter2D(Collision2D collsion)
-    {
-        //velocity with the downspeed 
-        rb.velocity = new Vector3(rb.velocity.x, downSpeed, 0);
-    
-
+        {
+            //velocity with the downspeed 
+            rb.velocity = new Vector3(rb.velocity.x, downSpeed, 0);
+        }
+    }                           
