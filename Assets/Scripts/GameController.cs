@@ -14,20 +14,30 @@ public class GameController : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //Interger i equalls 1000
+     //Interger i equalls 1000
         for (int i = 0; i < 1000; i++)
         {
-            //Exucute SpawnPlatforms 
+            //Execute SpawnPlatforms 
             SpawnPlatforms();
 
         }
 
-
-
-        // Update is called once per frame
-        void Update()
-        {
-
-        }
     }
 
+
+
+
+    // Update is called once per frame
+    void Update()
+    {
+       }
+
+    //Spawn Platforms function 
+    void SpawnPlatforms()
+    {
+        //Spawn platforms randomly on the x axis and place them on the Y axis every 2.5 
+        Instantiate(platform, new Vector3(Random.value * 10 - 5f, pos, 0.5f), Quaternion.identity);
+        pos += 2.5f;
+    }
+}
+        
