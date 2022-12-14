@@ -5,6 +5,16 @@ using UnityEngine.SceneManagement;
 
 public class GameController : MonoBehaviour
 {
+    //Game Over Canvas
+    [Header("Game Over UI Canvas Object")]
+    public GameObject gameOverCanvas;
+    //Game over function
+    public void GameOver()
+    {
+        //Game Over Canvas is active 
+        gameOverCanvas.SetActive(true);
+    }
+    
     //Platform gameobject 
     [Header("Platform Object")]
     public GameObject platform;
@@ -13,16 +23,17 @@ public class GameController : MonoBehaviour
 
     // Start is called before the first frame update
     void Start()
+
     {
-     //Interger i equalls 1000
+        //Interger i equalls 1000
         for (int i = 0; i < 1000; i++)
         {
             //Execute SpawnPlatforms 
             SpawnPlatforms();
 
         }
-
     }
+
 
 
 
@@ -30,7 +41,7 @@ public class GameController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-       }
+    }
 
     //Spawn Platforms function 
     void SpawnPlatforms()
@@ -39,5 +50,7 @@ public class GameController : MonoBehaviour
         Instantiate(platform, new Vector3(Random.value * 10 - 5f, pos, 0.5f), Quaternion.identity);
         pos += 2.5f;
     }
+
+
+
 }
-        
