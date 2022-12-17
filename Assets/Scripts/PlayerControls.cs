@@ -1,11 +1,15 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
 public class PlayerControls : MonoBehaviour
 {
+    [Header("Score Text")]
+    public Text scoreText;
 
+    //Score of game
+    private float topScore = 0.0f;
 
     //Rigidbody2D object that is stored 
     [Header("Rigidbody")]
@@ -30,13 +34,17 @@ public class PlayerControls : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        
         //movement equals Horizontal movement 
         //multiplied by the movement speed
         movement = Input.GetAxis("Horizontal") * movementSpeed;
         //if direction on x axis is less than 0
         if (movement < 0)
         {
-
+            //If players velocity is greater than 0 
+            //and position on the y axis is greater 
+            //than the score 
+            
             //object faces on the left
             this.GetComponent<SpriteRenderer>().flipX = false;
         }
@@ -47,6 +55,13 @@ public class PlayerControls : MonoBehaviour
             this.GetComponent<SpriteRenderer>().flipX = true;
 
         }
+        if (rb.velocity.y > 0 && transform.position.y > topScore)
+            {
+                //Score equals players position
+                topScore = transform.position.y;
+            }
+            //Text for the score equals to the top score
+            scoreText.text = "Score: " + Mathf.Round(topScore).ToString();
 
 
 
@@ -73,4 +88,5 @@ public class PlayerControls : MonoBehaviour
             //velocity with the downspeed 
             rb.velocity = new Vector3(rb.velocity.x, downSpeed, 0);
         }
+
     }                           
